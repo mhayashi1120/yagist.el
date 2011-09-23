@@ -1,4 +1,4 @@
-;; gist.el --- Emacs integration for gist.github.com
+;;; gist.el --- Emacs integration for gist.github.com
 
 ;; Author: Christian Neukirchen <purl.org/net/chneukirchen>
 ;; Maintainer: Chris Wanstrath <chris@ozmm.org>
@@ -7,7 +7,7 @@
 ;; Michael Ivey
 ;; Phil Hagelberg
 ;; Dan McKinley
-;; Version: 0.5
+;; Version: 0.6
 ;; Created: 21 Jul 2008
 ;; Keywords: gist git github paste pastie pastebin
 
@@ -38,7 +38,7 @@
 
 ;;; TODO;
 ;; * make major mode can delete a gist
-;; 
+;;
 
 ;;; Code:
 
@@ -98,11 +98,11 @@ posted.")
 
 (defvar gist-authenticate-function 'gist-basic-authentication)
 
-;; TODO http://developer.github.com/v3/oauth/ 
+;; TODO http://developer.github.com/v3/oauth/
 ;; "Desktop Application Flow" says that using the basic authentication...
 (defun gist-basic-authentication ()
   (destructuring-bind (user . pass) (github-auth-info-basic)
-    (format "Basic %s" 
+    (format "Basic %s"
             (base64-encode-string (format "%s:%s" user pass)))))
 
 (defun gist-oauth2-authentication ()
@@ -111,7 +111,7 @@ posted.")
 
 (defun gist-request (method url callback &optional json)
   (let ((url-request-data (and json (concat (json-encode json) "\n")))
-        (url-request-extra-headers 
+        (url-request-extra-headers
          `(("Authorization" . ,(funcall gist-authenticate-function))))
         (url-request-method method)
         (url-max-redirecton -1))
@@ -133,8 +133,8 @@ With a prefix argument, makes a private paste."
      'gist-created-callback
      `(("description" . ,description)
        ("public" . ,(if private :json-false 't))
-       ("files" . 
-        ((,name . 
+       ("files" .
+        ((,name .
                 (("content" . ,(buffer-substring begin end))))))))))
 
 (defun gist-created-callback (status)
@@ -419,8 +419,8 @@ for the gist."
            (or (and directory (file-name-as-directory directory))
                default-directory))
          (proc (apply 'start-process "Gist" buffer "git" args)))
-    (set-process-sentinel 
-     proc (lambda (p e) 
+    (set-process-sentinel
+     proc (lambda (p e)
             (when (memq (process-status p) '(exit signal))
               (let ((code (process-exit-status p)))
                 (cond
