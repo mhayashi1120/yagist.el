@@ -264,7 +264,7 @@ should both be strings."
 
 (defun yagist-read-config (key)
   (let ((val (yagist-command-to-string
-              "config" "--global" (format "github.%s" key))))
+              "config" "--global" "--includes" (format "github.%s" key))))
     (cond
      ((string-match "\\`[\n]*\\'" val) nil)
      ((string-match "\n+\\'" val)
