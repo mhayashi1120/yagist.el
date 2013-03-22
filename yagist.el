@@ -42,7 +42,7 @@
 ;; If you want to save encrypted token to ~/.gitconfig download following url.
 ;;
 ;; https://github.com/mhayashi1120/Emacs-cipher/raw/master/cipher/aes.el
-;; 
+;;
 ;; (setq yagist-encrypt-risky-config t)
 
 ;;; TODO:
@@ -133,7 +133,8 @@ Example:
   "Show your gist list"
   (setq buffer-read-only t)
   (setq truncate-lines t)
-  (setq revert-buffer-function 'yagist-list-revert-buffer)
+  (set (make-local-variable 'revert-buffer-function)
+       'yagist-list-revert-buffer)
   (add-hook 'post-command-hook 'yagist-list--paging-retrieve nil t)
   (use-local-map yagist-list-mode-map))
 
