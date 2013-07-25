@@ -121,6 +121,7 @@ Example:
     (define-key map "g" 'revert-buffer)
     (define-key map "p" 'previous-line)
     (define-key map "n" 'forward-line)
+    (define-key map "q" 'yagist-quit-window)
     map))
 
 (defvar yagist-list--paging-info nil)
@@ -391,6 +392,12 @@ Copies the URL into the kill ring."
   (interactive)
   (message "Retrieving list of your gists...")
   (yagist-list-draw-gists 1))
+
+(defun yagist-quit-window (&optional kill-buffer)
+  "Bury the *gists* buffer and delete its window.
+With a prefix argument, kill the buffer instead."
+  (interactive "P")
+  (quit-window kill-buffer (get-buffer-window "*gists*")))
 
 (defun yagist-list--paging-retrieve ()
   (cond
