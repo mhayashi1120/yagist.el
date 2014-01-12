@@ -165,6 +165,7 @@ Example:
 (defun yagist-check-oauth-token ()
   (cond
    ((or yagist-github-token
+        (yagist-config "token")
         (yagist-config "oauth-token")))
    (t
     (let* ((user (or yagist-github-user
