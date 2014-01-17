@@ -7,7 +7,7 @@
 ;; Michael Ivey
 ;; Phil Hagelberg
 ;; Dan McKinley
-;; Version: 0.8.9
+;; Version: 0.8.10
 ;; Created: 21 Jul 2008
 ;; Keywords: gist git github paste pastie pastebin
 ;; Package-Requires: ((json "1.2.0"))
@@ -220,6 +220,9 @@ should both be strings."
 
 (defvar yagist-risky-config-keys
   '("oauth-token"))
+
+(declare-function kaesar-decrypt-string "kaesar")
+(declare-function kaesar-encrypt-string "kaesar")
 
 (defun yagist-decrypt-string (key string)
   (let ((kaesar-decrypt-prompt
