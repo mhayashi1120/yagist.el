@@ -622,7 +622,7 @@ for the gist."
     (cond
      ;; check redirected location indicate public/private gist url
      ((and (stringp location)
-           (string-match "\\([0-9]+\\|[0-9a-zA-Z]\\{20\\}\\)$" location))
+           (string-match "\\([0-9]+\\|[0-9a-zA-Z]\\{32\\}\\)$" location))
       (let ((id (match-string 1 location)))
         (setq http-url (format "https://gist.github.com/%s" id))
         (message "Paste created: %s" http-url)
