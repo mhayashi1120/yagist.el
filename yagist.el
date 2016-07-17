@@ -111,6 +111,9 @@ Example:
 (defvar yagist-list--paging-info nil)
 (make-variable-buffer-local 'yagist-list--paging-info)
 
+(defvar yagist-list-hook nil
+  "*Hook run after `yagist-list'.")
+
 (define-derived-mode yagist-list-mode fundamental-mode "YaGist"
   "Show your gist list"
   (setq buffer-read-only t)
@@ -666,7 +669,9 @@ and displays the list."
 
           ;; skip header
           (forward-line)
-          (set-window-buffer nil (current-buffer)))))
+          (set-window-buffer nil (current-buffer))
+          ;; Run hook
+          (run-hooks 'yagist-list-hook))))
     (url-mark-buffer-as-dead (current-buffer))))
 
 ;;;
