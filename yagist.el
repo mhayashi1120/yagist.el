@@ -148,6 +148,7 @@ Example:
 (defun yagist-check-oauth-token ()
   (cond
    ((or yagist-github-token
+        (yagist-config "token")
         (yagist-config "oauth-token")))
    (t
     (browse-url "https://github.com/settings/applications")
